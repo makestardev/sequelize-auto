@@ -2,7 +2,7 @@
   "name": "@makestardev/sequelize-auto",
   "version": "0.8.7",
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   },
   "description": "Automatically generate bare sequelize models from your database.",
   "main": "index.js",
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sequelize/sequelize-auto.git"
+    "url": "https://github.com/makestardev/sequelize-auto.git"
   },
   "bugs": {
     "url": "https://github.com/sequelize/sequelize-auto/issues"
@@ -43,7 +43,7 @@
     "tsc": "tsc",
     "clean": "rimraf lib && rimraf types && rimraf **/models && rimraf *.tgz",
     "build": "npm run clean && tsc",
-    "prepack": "crlf --set=LF bin/sequelize-auto",
+    "prepack": "npx crlf --set=LF bin/sequelize-auto",
     "test": "npm run test-mssql && npm run test-mysql && npm run test-postgres && npm run test-sqlite",
     "test-postgres": "cross-env DEBUG='sequelize-auto:*' DIALECT=postgres nyc mocha",
     "test-postgres-native": "cross-env DEBUG='sequelize-auto:*' DIALECT=postgres-native nyc mocha",

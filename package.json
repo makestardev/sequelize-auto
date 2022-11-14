@@ -1,8 +1,8 @@
 {
-  "name": "sequelize-auto",
+  "name": "@makestardev/sequelize-auto",
   "version": "0.8.7",
   "publishConfig": {
-    "tag": "latest"
+    "registry":"https://npm.pkg.github.com"
   },
   "description": "Automatically generate bare sequelize models from your database.",
   "main": "index.js",

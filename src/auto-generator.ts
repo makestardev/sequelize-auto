@@ -112,7 +112,7 @@ export class AutoGenerator {
         const creationOptionalFields = this.getTypeScriptCreationOptionalFields(table);
 
         if (creationOptionalFields.length) {
-          str += `export type #TABLE#OptionalAttributes = ${creationOptionalFields.map((k) => `"${recase(this.options.caseProp, k)}"`).join(' | ')};\n`;
+          str += `export type #TABLE#OptionalAttributes = ${creationOptionalFields.map((k) => `"${recase(this.options.caseProp, k, false, k[0] === '_')}"`).join(' | ')};\n`;
           str += "export type #TABLE#CreationAttributes = Optional<#TABLE#Attributes, #TABLE#OptionalAttributes>;\n\n";
         } else {
           str += "export type #TABLE#CreationAttributes = #TABLE#Attributes;\n\n";
@@ -253,7 +253,7 @@ export class AutoGenerator {
       fieldObj.foreignKey = foreignKey;
     }
 
-    const fieldName = recase(this.options.caseProp, field);
+    const fieldName = recase(this.options.caseProp, field, false, field[0] === '_');
     let str = this.quoteName(fieldName) + ": {\n";
 
     const quoteWrapper = '"';
@@ -696,7 +696,7 @@ export class AutoGenerator {
     let str = '';
     fields.forEach(field => {
       if (!this.options.skipFields || !this.options.skipFields.includes(field)){
-        const name = this.quoteName(recase(this.options.caseProp, field));
+        const name = this.quoteName(recase(this.options.caseProp, field, field[0] === '_'));
         const isOptional = this.getTypeScriptFieldOptional(table, field);
         str += `${sp}${name}${isOptional ? '?' : notNull}: ${this.getTypeScriptType(table, field)};\n`;
       }

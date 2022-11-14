@@ -205,7 +205,7 @@ export function singularize(s: string) {
 }
 
 /** Change casing of val string according to opt [c|l|o|p|u]  */
-export function recase(opt: CaseOption | CaseFileOption | undefined, val: string | null, singular = false) {
+export function recase(opt: CaseOption | CaseFileOption | undefined, val: string | null, singular = false, isUnderbarColumn = false) {
   if (singular && val) {
     val = singularize(val);
   }
@@ -213,7 +213,13 @@ export function recase(opt: CaseOption | CaseFileOption | undefined, val: string
     return val || ''; // original
   }
   if (opt === 'c') {
-    return _.camelCase(val);
+    let cased = _.camelCase(val);
+
+    if (isUnderbarColumn) {
+      cased = '_' + cased
+    }
+
+    return cased;
   }
   if (opt === 'k') {
     return _.kebabCase(val);

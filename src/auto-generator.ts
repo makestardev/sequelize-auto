@@ -696,7 +696,7 @@ export class AutoGenerator {
     let str = '';
     fields.forEach(field => {
       if (!this.options.skipFields || !this.options.skipFields.includes(field)){
-        const name = this.quoteName(recase(this.options.caseProp, field, field[0] === '_'));
+        const name = this.quoteName(recase(this.options.caseProp, field, false, field[0] === '_'));
         const isOptional = this.getTypeScriptFieldOptional(table, field);
         str += `${sp}${name}${isOptional ? '?' : notNull}: ${this.getTypeScriptType(table, field)};\n`;
       }
